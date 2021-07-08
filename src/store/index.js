@@ -75,6 +75,7 @@ const store = createStore({
             })
             .then(response => {
                 console.log(response)
+                dispatch('getTotalDonations')
                 dispatch('getAllDonations')
                 commit('SET_LOADING', false)
             })
@@ -94,6 +95,7 @@ const store = createStore({
             })
             .then(response => {
                 console.log(response)
+                dispatch('getTotalDonations')
                 dispatch('getAllDonations')
                 commit('SET_LOADING', false)
             })
@@ -106,6 +108,7 @@ const store = createStore({
             await axios.post(`https://shazad-donation-project-api.herokuapp.com/delete/donation=${index}`)
             .then(response => {
                 console.log(response)
+                dispatch('getTotalDonations')
                 dispatch('getAllDonations')
             })
             .catch((error) => {
