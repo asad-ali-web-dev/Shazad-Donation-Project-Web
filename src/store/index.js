@@ -5,7 +5,8 @@ const store = createStore({
     state: () => ({
         donations: [],
         admin: {},
-        loading: false
+        loading: false,
+        totalDonation: 0,
     }),
     getters: {
         GET_DONATIONS(state) {
@@ -13,6 +14,9 @@ const store = createStore({
         },
         GET_LOADING(state) {
             return state.loading
+        },
+        GET_TOTAL_DONATION(state) {
+            return state.totalDonation
         }
     },
     mutations: {
@@ -27,6 +31,9 @@ const store = createStore({
         },
         SET_LOADING(state, payload) {
             return state.loading = payload
+        },
+        SET_TOTAL_DONATION(state, payload) {
+            state.totalDonation = payload
         }
     },
     actions: {
@@ -46,6 +53,18 @@ const store = createStore({
             })
             .catch((error) => {
                 console.log(error)
+                commit('SET_LOADING', false)
+            })
+        },
+        async getTotalDonations({ commit, state }) {
+            commit('SET_LOADING', true)
+            await axios.get('https://shazad-donation-project-api.herokuapp.com/get/total/donations')
+            .then(response => {
+                console.log(response)
+                commit('SET_TOTAL_DONATION', response.data.total)
+                commit('SET_LOADING', false)
+            })
+            .catch((error) => {
                 commit('SET_LOADING', false)
             })
         },

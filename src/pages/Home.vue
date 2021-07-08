@@ -34,7 +34,7 @@
                 </tr>
                 <tr class="text-secondary">
                     <td colspan="2"> <strong>Total Donation</strong> </td>
-                    <td colspan="1" class="px-sm-5 text-sm-center" style="width: 1px;"> <strong>98790</strong> </td>
+                    <td colspan="1" class="px-sm-5 text-sm-center" style="width: 1px;"> <strong>{{ total }}</strong> </td>
                 </tr>
             </tbody>
         </table>
@@ -54,7 +54,8 @@ export default {
     computed: {
         ...mapGetters({
             donations: 'GET_DONATIONS',
-            loading: 'GET_LOADING'
+            loading: 'GET_LOADING',
+            total: 'GET_TOTAL_DONATION'
         }),
         donationIsEmpty() {
             return this.donations.length === 0
